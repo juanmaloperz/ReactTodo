@@ -5,7 +5,7 @@ handlesearch: function(){
 var searchText = this.refs.searchText.value;
 var showCompleted = this.refs.showCompleted.checked;
 
-this.props.onChange(searchText, showCompleted);
+this.props.onSearch( showCompleted, searchText);
 },
 render: function(){
 return(
