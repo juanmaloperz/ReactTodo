@@ -37,4 +37,24 @@ describe ('TodoApi', ()=>{
       expect(actualTodos).toEqual(todos);
     });
   });
+  describe('filterTodos',()=>{
+    var todos =[{id:1,text:'text here', completed:true},{id:2,text:' other text here', completed:false} ,{
+    id:3,text:' some text here', completed:true}];
+    it('It should return all items if completed is true', () =>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toBe(3);
+    });
+    it('It should return the items than have benn checked', () =>{
+      var filteredTodos = TodoAPI.filterTodos(todos, false, '');
+      expect(filteredTodos.length).toBe(1);
+    });
+    it('It shloud return the uncompleted items firts',()=>{
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+     expect(filteredTodos[0].completed).toBe(false);
+   });
+   it('It should filter todos by searchText', () =>{
+     var filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
+     expect(filteredTodos.length).toBe(1);
+   });
+  });
 });

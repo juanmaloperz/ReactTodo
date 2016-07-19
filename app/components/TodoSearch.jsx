@@ -16,7 +16,7 @@ return(
   <div>
     <label>
     <input type="checkbox" ref="showCompleted" onChange={this.handlesearch}/>
-Listo el Todo
+show completed todos
 </label>
 </div>
   </div>
