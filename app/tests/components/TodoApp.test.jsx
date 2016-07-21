@@ -46,3 +46,4 @@ it(' test when toggle from true to false, completedAT get remove',()=>{
       expect(todoApp.state.todos[0].completed).toBe(false);
       expect(todoApp.state.todos[0].completedAt).toNotExist();
   });
+});

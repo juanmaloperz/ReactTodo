@@ -34,5 +34,4 @@ it( 'Should call onaddTodo if a todo is entered',() =>{
 
         expect(spy).toNotHaveBeenCalled(todoText);
     });
-
 });

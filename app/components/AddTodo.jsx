@@ -14,17 +14,13 @@ var AddTodo = React.createClass({
 },
 render: function(){
   return(
-    <div>
+<div className="container_footer">
 <form onSubmit={this.handleSubmit}>
-  <div>
-<input type="text" ref="todoText" placeholder= "Add To do"/>
-  </div>
-  <div>
+<input type="text" ref="todoText" placeholder= "What do you need todo"/>
     <button className="button expanded"> Add to Do </button>
-  </div>
 </form>
 </div>
       );
-      }
-      });
+    }
+  });
 module.exports = AddTodo;
