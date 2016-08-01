@@ -17,7 +17,7 @@ it('Shloud call the actions ADD TODO', () => {
     text: 'Something todo '
   };
   var res = actions.addTodo(action.text);
-  expect(res).toEqual(text);
+  expect(res).toEqual(action);
 });
 it('Shloud call the actions TOGGLE Show Completed', () => {
   var action = {
@@ -32,6 +32,6 @@ it('Shloud call the actions TOGGLE To do', () => {
     id: '3'
   };
   var res = actions.toggleTodo(action.id);
-  expect(res).toEqual(id);
+  expect(res).toEqual(action);
 });
 });
