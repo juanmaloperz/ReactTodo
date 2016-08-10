@@ -5,15 +5,17 @@ var expect = require('expect');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 var TodoList = require('TodoList');
+
 var {Todo} = require('Todo');
 
 describe('Todo', () => {
   it('should exist', () => {
     expect(Todo).toExist();
 });
-it('Shloud call ontoggle when the click is pressed',()=>{
+it('It Should dispatch TOGGLE_TODO action  on Click',()=>{
 var dummy = {
-  id:199, text:'Mc is the moment',
+  id:199,
+   text:'Mc is the moment',
   completed: true
 }
 var spy = expect.createSpy();
