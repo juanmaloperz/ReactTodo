@@ -18,7 +18,7 @@ var TodoApp = React.createClass({
 componentDidUpdate: function(){
   TodoAPI.setTodos(this.state.todos);
 },
-handleAddTodo: function(text){
+/*handleAddTodo: function(text){
   this.setState({
     todos:[
      ...this.state.todos,
@@ -31,18 +31,8 @@ handleAddTodo: function(text){
    }
  ]
   })
-},
-handleToggle: function(id){
-    var updatedTodos = this.state.todos.map((todo) => {
-       if( todo.id === id){
-         todo.completed = !todo.completed;
-         todo.completedAt = todo.completed ? moment().unix(): undefined;
-       }
-      return todo;
-    });
-    this.setState({todos: updatedTodos});
-},
-handlesearch: function(showCompleted,searchText){
+}, */
+handleSearch: function(showCompleted,searchText){
   this.setState({
     showCompleted: showCompleted ,
     searchText: searchText.toLowerCase()
@@ -50,7 +40,7 @@ handlesearch: function(showCompleted,searchText){
 },
 render: function (){
   var {todos, showCompleted, searchText} = this.state;
-  var filterTodos = TodoAPI.filterTodos(todos,showCompleted, searchText);
+  var filterTodos = TodoAPI.filterTodos(todos,showCompleted, searchText);   // UNderstan this better
 return(
 <div>
 <h1 className="page-tittle"> Todo App</h1>
@@ -58,8 +48,8 @@ return(
   <div className= "column small-centered small-11 medium-6 large-5">
    <div className="container">
     <TodoSearch  onSearch={this.handlesearch}/>
-    <TodoList todos={filterTodos} onToggle={this.handleToggle}/>
-    <AddTodo onaddTodo={this.handleAddTodo}/>
+    <TodoList/>
+    <AddTodo/> //onaddTodo={this.handleAddTodo}/>
    </div>
   </div>
  </div>
