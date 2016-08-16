@@ -33,5 +33,21 @@ it('Shloud set SearchText', () => {
      expect(res.length).toEqual(1);
      expect(res[0].text).toEqual(action.text);
      });
+     it('Shloud add exising todos',()=>{
+       var todos = [{
+             id: '111',
+             text: 'anything',
+             completed: 'false',
+             completedAt: undefined,
+             createdAt: 33000
+       }];
+       var actio = {
+         type: 'ADD_TODOS',
+         todos
+       };
+       var res = reducers.todosReducer(df([]),df(action));
+        expect(res.length).toEqual(1);
+        expect(res[0]).toEqual((todos[0]));
+     })
    });
 });

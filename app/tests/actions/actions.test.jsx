@@ -19,6 +19,21 @@ it('Shloud call the actions ADD TODO', () => {
   var res = actions.addTodo(action.text);
   expect(res).toEqual(action);
 });
+it ( ' Shloud generate add todos actios',() =>{
+  var todos = [{
+        id: '111',
+        text: 'anything',
+        completed: 'false',
+        completedAt: undefined,
+        createdAt: 33000
+  }];
+  var actio = {
+    type: 'ADD_TODOS',
+    todos
+  }
+  var res = actions.addTodos(todos);
+  expect(res).toEqual(action);
+})
 it('Shloud call the actions TOGGLE Show Completed', () => {
   var action = {
     type: 'TOGGLE_SHOW_COMPLETED'

@@ -16,7 +16,7 @@ render: function(){
       var message ='Completed';
       var timestamp= completedAt;
     }
-    return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
+    return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');  //
   };
   return(
     <div className={todoClassName} onClick={()=>{
@@ -25,10 +25,10 @@ render: function(){
       <div>
         <input type="checkbox" checked={completed}/>
       </div>
-       <p>{text}</p>
-       <p>{renderDate()}</p>
+       <p>{text}</p> <br/>
+       <p className="todo_subtext">{renderDate()}</p>
     </div>
   )
 }
 });
-export default  connect()(Todo);
+export default connect()(Todo);
