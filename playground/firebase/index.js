@@ -14,7 +14,7 @@ firebaseRef.set({
   app:{
     name: 'Todo App',
     version: 1
-  }
+  },
   isRunning: true,
   user:{
     name: 'Juan',
