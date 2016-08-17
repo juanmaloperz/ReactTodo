@@ -4,7 +4,7 @@ var {Provider} = require('react-redux');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 var TodoAPI = require('TodoAPI');
 
-//import './../playground/firebase/index';
+import './../playground/firebase/index';
 
 var TodoApp = require('TodoApp');
 

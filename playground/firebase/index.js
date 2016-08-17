@@ -7,7 +7,21 @@ var config = {
   storageBucket: "juan-todo.appspot.com",
 };
 firebase.initializeApp(config);
+ var firebaseRef = firebase.database().ref
 
-firebase.datebase().ref.set({
-  appName: 'Todo App'
-});
+firebaseRef.set({
+  appName: 'Todo App',
+  isRunning: true,
+  user:{
+    name: 'Juan',
+    age: 34
+  }
+}).then(()=>{
+  console.log('Set Worked!');
+}, (e)=>{
+  console.log('Set failed');
+})
+
+firebaseRef.set().child('user').set({
+  name: 'Pedro'
+})
