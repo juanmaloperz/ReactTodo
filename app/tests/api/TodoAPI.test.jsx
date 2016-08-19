@@ -1,60 +1,96 @@
 var expect = require('expect');
-var TodoAPI = require('TodoAPI')
 
-describe ('TodoApi', ()=>{
-  beforeEach(()=>{
+var TodoAPI = require('TodoAPI');
+
+describe('TodoAPI', () => {
+  beforeEach(() => {
     localStorage.removeItem('todos');
   });
-  it('Should Exist',()=>{
+
+  it('should exist', () => {
     expect(TodoAPI).toExist();
   });
-  describe('setTodos',()=>{
 
-    it(' Shoulset with  valid data',()=>{
-      var todos = [{id:29, text:'Should i stay or shoul i go', completed: false}];
+  describe('setTodos', () => {
+    it('should set valid todos array', () => {
+      var todos = [{
+        id: 23,
+        test: 'test all files',
+        completed: false
+      }];
       TodoAPI.setTodos(todos);
-       var actual = JSON.parse(localStorage.getItem('todos'));
 
-       expect(actual).toEqual(todos);
+      var actualTodos = JSON.parse(localStorage.getItem('todos'));
+
+      expect(actualTodos).toEqual(todos);
     });
-    it('Shlould not set with invalid data',()=>{
-      var faketodos = {a:'b'};
-      TodoAPI.setTodos(faketodos)
-      var actualfake = JSON.parse(localStorage.getItem('faketodos'));
 
-      expect (actualfake).toBe(null)
+    it('should not set invalid todos array', () => {
+      var badTodos = {a: 'b'};
+      TodoAPI.setTodos(badTodos);
+
+      expect(localStorage.getItem('todos')).toBe(null);
     });
   });
-  describe('getTodos',()=>{
-    it( 'Should not render with invalid data',()=>{
-        var actualTodos = TodoAPI.getTodos();
-        expect(actualTodos).toEqual([]);
+
+  describe('getTodos', () => {
+    it('should return empty array for bad localstorage data', () => {
+      var actualTodos = TodoAPI.getTodos();
+      expect(actualTodos).toEqual([]);
     });
-    it(' Should render with valid data',()=>{
-      var todos = [{id:29, text:'Should i stay or shoul i go', completed: false}];
+
+    it('should return todo if valid array in localstorage', () => {
+      var todos = [{
+        id: 23,
+        test: 'test all files',
+        completed: false
+      }];
+
       localStorage.setItem('todos', JSON.stringify(todos));
       var actualTodos = TodoAPI.getTodos();
+
       expect(actualTodos).toEqual(todos);
     });
   });
-  describe('filterTodos',()=>{
-    var todos =[{id:1,text:'text here', completed:true},{id:2,text:' other text here', completed:false} ,{
-    id:3,text:' some text here', completed:true}];
-    it('It should return all items if completed is true', () =>{
+
+  describe('filterTodos', () => {
+    var todos = [{
+      id: 1,
+      text: 'Some text here',
+      completed: true
+    },{
+      id: 2,
+      text: 'Other text here',
+      completed: false
+    },{
+      id: 3,
+      text: 'Some text here',
+      completed: true
+    }];
+
+    it('should return all items if showCompleted is true', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, true, '');
       expect(filteredTodos.length).toBe(3);
     });
-    it('It should return the items than have benn checked', () =>{
+
+    it('should return non-completed todos when showCompleted is false', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, false, '');
       expect(filteredTodos.length).toBe(1);
     });
-    it('It shloud return the uncompleted items firts',()=>{
+
+    it('should sort by completed status', () => {
       var filteredTodos = TodoAPI.filterTodos(todos, true, '');
-     expect(filteredTodos[0].completed).toBe(false);
-   });
-   it('It should filter todos by searchText', () =>{
-     var filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
-     expect(filteredTodos.length).toBe(1);
-   });
+      expect(filteredTodos[0].completed).toBe(false);
+    });
+
+    it('should filter todos by searchText', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
+      expect(filteredTodos.length).toBe(2);
+    });
+
+    it('should return all todos if searchText is empty', () => {
+      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      expect(filteredTodos.length).toBe(3);
+    });
   });
 });

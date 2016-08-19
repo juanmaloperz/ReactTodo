@@ -8,27 +8,26 @@ var config = {
 };
 firebase.initializeApp(config);
 
- var firebaseRef = firebase.database().ref
+var firebaseRef = firebase.database().ref();
 
 firebaseRef.set({
-  app:{
+  app: {
     name: 'Todo App',
-    version: 1
+    version: '1.0.0'
   },
   isRunning: true,
-  user:{
-    name: 'Juan',
-    age: 34
+  user: {
+    name: 'Andrew',
+    age: 25
   }
-}).then(()=>{
-  console.log('Set Worked!');
-}, (e)=>{
-  console.log('Set failed');
-})
+});
 
-firebaseRef.child('user').set({
-  name: 'Pedro'
-})
- firebaseRef.child('app').set({
-   version: 2
- })
+var todosRef = firebaseRef.child('todos');
+
+todosRef.on('child_added', (snapshot)=>{
+  console.log('child_added', snapshot.key , snapshot.val());
+});
+
+todosRef.push().set({
+  addtodo: 'Play station 3'
+});
