@@ -40,33 +40,6 @@ export var startAddTodo = (text) => {
     });
   };
 };
-it('should render one Todo component for each todo item', () => {
-    var todos = [{
-      id: 1,
-      text: 'Do something',
-      completed: false,
-      completedAt: undefined,
-      createdAt: 500
-    }, {
-      id: 2,
-      text: 'Check mail',
-      completed: false,
-      completedAt: undefined,
-      createdAt: 500
-    }];
-    var store = configure({
-      todos
-    });
-    var provider = TestUtils.renderIntoDocument(
-      <Provider store={store}>
-        <ConnectedTodoList/>
-      </Provider>
-    );
-    var todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
-    var todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
-
-    expect(todosComponents.length).toBe(todos.length);
-  });
 
 export var addTodos = (todos) => {
   return {
@@ -75,9 +48,23 @@ export var addTodos = (todos) => {
   };
 };
 
-export var toggleTodo = (id) => {
+export var updateTodo = (id, updates) => {
   return {
-    type: 'TOGGLE_TODO',
-    id
+    type: 'UPDATE_TODO',
+    id,
+    updates
   };
 };
+
+export var  startToggleTodo = (id, completed) => {
+  return (dispatch, getState)=> {
+    var todoRef = firebaseRef.child(`todo/${id}`);
+   var updates = {
+     completed,
+     completedAt : completed ? moment().unix() : null
+   }
+    todoRef.updates(updates).then(() => {
+      dispatch(updateTodo(id,updates));
+    });
+  }
+}
